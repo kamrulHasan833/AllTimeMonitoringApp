@@ -16,7 +16,7 @@ environment.staging = {
   envName: 'Staging',
   maxCheck: 5,
   twilio: {
-    from: '',
+    from: '6464',
     accountSid: '',
     authToken: '',
   },
