@@ -13,13 +13,14 @@ const { StringDecoder } = require('string_decoder');
 const routes = require('../routes');
 const { notFoundHandler } = require('../handlers/routeHandlers/notFoundHandler');
 const { parseJson } = require('./utilities');
+const data = require('../lib/data');
 
 // Module Scaffolding
 const handler = {};
 
 // Configuration
 handler.reqResHandler = (req, res) => {
-  // Request Handler
+  // Request Handler//
   // All request propertice
   const parseUrl = url.parse(req.url, true);
   const path = parseUrl.pathname;
@@ -37,6 +38,7 @@ handler.reqResHandler = (req, res) => {
   };
   const chosenHandler = routes[trimmedPath] ? routes[trimmedPath] : notFoundHandler;
   let realData = '';
+
   req.on('data', (buffer) => {
     realData += encoder.write(buffer);
   });

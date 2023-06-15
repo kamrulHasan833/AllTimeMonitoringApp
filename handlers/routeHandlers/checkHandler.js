@@ -180,12 +180,12 @@ handler._check.put = (requestProperties, callback) => {
   const tokenId = typeof (requestProperties.headersObject.token) === 'string' && requestProperties.headersObject.token.length === 20 ? requestProperties.headersObject.token : false;
 
   if (protocol || url || method || successCode || timeoutSecond) {
-    data.read('checks', id, (err, checkData) => {
-      const updatedCheckData = parseJson(checkData);
-      if (!err && checkData) {
-        data.read('token', tokenId, (err2, tokenData) => {
-          if (!err2 && tokenData) {
-            tokenHandler._token.verify(tokenId, parseJson(tokenData).phone, (validation) => {
+    data.read('token', tokenId, (err2, tokenData) => {
+      if (!err2 && tokenData) {
+        tokenHandler._token.verify(tokenId, parseJson(tokenData).phone, (validation) => {
+          data.read('checks', id, (err, checkData) => {
+            if (!err && checkData) {
+              const updatedCheckData = parseJson(checkData);
               if (validation) {
                 if (protocol) {
                   updatedCheckData.protocol = protocol;
@@ -212,20 +212,20 @@ handler._check.put = (requestProperties, callback) => {
                   }
                 });
               } else {
-                callback(403, {
-                  error: 'Error! There was an authentication problem.',
+                callback(405, {
+                  error: 'Error! There was no id to check.',
                 });
               }
-            });
-          } else {
-            callback(500, {
-              error: 'Error! There was an server problem',
-            });
-          }
+            } else {
+              callback(403, {
+                error: 'Error! There was an authentication problem.',
+              });
+            }
+          });
         });
       } else {
-        callback(405, {
-          error: 'Error! There was no id to check.',
+        callback(500, {
+          error: 'Error! There was an server problem',
         });
       }
     });

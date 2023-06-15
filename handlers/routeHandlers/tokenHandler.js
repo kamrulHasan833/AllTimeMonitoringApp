@@ -46,8 +46,8 @@ handler._token.post = (requestProperties, callback) => {
         };
 
         if (password === userData.password) {
-          data.create('token', tokenId, tokenObject, (err) => {
-            if (!err) {
+          data.create('token', tokenId, tokenObject, (err2) => {
+            if (!err2) {
               callback(200, {
                 success: 'Success! you have abled to crate an token for 1 hour.',
               });
@@ -55,7 +55,7 @@ handler._token.post = (requestProperties, callback) => {
               callback(500, {
                 error: "Error! You don't have created an user accound for server issues.",
               });
-              console.log(err);
+              console.log(err2);
             }
           });
         } else {
@@ -100,7 +100,7 @@ handler._token.get = (requestProperties, callback) => {
 handler._token.put = (requestProperties, callback) => {
   const id = typeof (requestProperties.body.id) === 'string' && requestProperties.body.id.trim().length === 20 ? requestProperties.body.id : false;
 
-  const extend = typeof (requestProperties.body.extend) === 'boolean' ? requestProperties.body.extend : false;
+  const extend = typeof (requestProperties.body.extend) === 'boolean' && requestProperties.body.extend ? requestProperties.body.extend : false;
   if (id && extend) {
     data.read('token', id, (err, tokenData) => {
       if (!err) {

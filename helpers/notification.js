@@ -8,7 +8,7 @@
 */
 
 // Dependencies
-const https = require('node:https');
+const https = require('https');
 const querystring = require('querystring');
 const { twilio } = require('./environment');
 
@@ -33,9 +33,10 @@ notification.sendTwilioSms = (phone, sms, callback) => {
 
     // Https request object to twilio
     const requestObject = {
+      protocol: 'https:',
       hostname: 'api.twilio.com',
       path: `/2010-04-01/Accounts/${twilio.accountSid}/Messages.json`,
-      method: 'GET',
+      method: 'POST',
       auth: `${twilio.accountSid}:${twilio.authToken}`,
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
