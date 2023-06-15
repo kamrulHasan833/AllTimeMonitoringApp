@@ -16,9 +16,9 @@ environment.staging = {
   envName: 'Staging',
   maxCheck: 5,
   twilio: {
-    from: '+13613663715',
-    accountSid: 'ACd3c1dd5255b3a15b7e07e48a690cf690',
-    authToken: '732a5d3af70e166f9011fcfe96e02eea',
+    from: '',
+    accountSid: '',
+    authToken: '',
   },
 };
 
@@ -28,9 +28,9 @@ environment.production = {
   envName: 'Production',
   maxCheck: 5,
   twilio: {
-    from: '+13613663715',
-    accountSid: 'ACd3c1dd5255b3a15b7e07e48a690cf690',
-    authToken: '732a5d3af70e166f9011fcfe96e02eea',
+    from: '',
+    accountSid: '',
+    authToken: '',
   },
 };
 
