@@ -17,7 +17,7 @@ environment.staging = {
   maxCheck: 5,
   twilio: {
     from: '459829851',
-    accountSid: '',
+    accountSid: '64916578277afkh',
     authToken: '',
   },
 };
